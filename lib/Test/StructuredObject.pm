@@ -59,9 +59,40 @@ If neither of these solutions appeals to you, YOU DON'T HAVE TO USE THIS MODULE!
 
 =cut
 
+use Test::More;
 use Test::StructuredObject::TestSuite;
 use Test::StructuredObject::SubTest;
 use Test::StructuredObject::Test;
 use Test::StructuredObject::NonTest;
+
+use Sub::Exporter -setup => {
+ exports => [ qw( test step testsuite subtests ) ],
+ groups => { default => [qw( test step testsuite subtests ) ] },
+
+};
+
+sub test(&) {
+  my $code = shift;
+  return Test::StructuredObject::Test->new( code => $code );
+}
+
+sub step(&) {
+  my $code = shift;
+  return Test::StructuredObject::NonTest->new( code => $code );
+}
+
+sub testsuite(@) {
+  my $i = Test::StructuredObject::TestSuite->new( items => \@_ );
+#  $i->run();
+  return $i;
+}
+
+sub subtests($@) {
+  my $name  = shift;
+  my @items = @_;
+  return Test::StructuredObject::SubTest->new( name => $name, items => \@items );
+}
+
+
 
 1;
