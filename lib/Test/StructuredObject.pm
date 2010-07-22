@@ -58,4 +58,10 @@ If neither of these solutions appeals to you, YOU DON'T HAVE TO USE THIS MODULE!
 =back
 
 =cut
+
+use Test::StructuredObject::TestSuite;
+use Test::StructuredObject::SubTest;
+use Test::StructuredObject::Test;
+use Test::StructuredObject::NonTest;
+
 1;
