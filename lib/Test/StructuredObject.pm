@@ -107,7 +107,7 @@ you can tweak and use export tunings as supported by that module.
 This method creates a L<< C<Test>|Test::Structured::Test >> object containing the given code.
 Code is run at run-time when called on the objects C<< ->run >> method.
 The code is run in an C<eval> container and as such will not die. Deaths called inside the C<eval> will
-merely be downgraded to warnings and passed to L<< C<croak>|Carp/croak >>. See
+merely be downgraded to warnings and passed to L<< C<carp>|Carp/carp >>. See
 L<the run documentation|Test::Structured::CodeStub/run> for details.
 
 This object type is recognised by containing types, and presence of such types increments the relevant
