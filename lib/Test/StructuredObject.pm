@@ -40,17 +40,23 @@ This technique has various perks:
 
 =item 1. No need to count tests manually
 
-=item 2. Tests are still counted internally, so test harness can report tests that failed to run.
+=item 2. Tests are still counted internally:
 
-=item 3. Tests are collected in a sort of state-graph of sorts, almost A.S.T. like in nature, which permits
-various run-time permutations of the graph for different results.
+Test harness can report tests that failed to run.
 
-=item 4. Every C<test { }> closure is executed in an C<eval { }>, making subsequent tests not fail if one
-dies.
+=item 3. Tests are collected in a sort of state-graph of sorts:
 
-=item 5. Internal storage of many simple sub-calls allows reasonably good L<< C<Deparse>|B::Deparse >>
-introspection, so if need be, the entire execution tree can easily be rewritten to be completely
-Test::StructuredObject free.
+This is almost A.S.T. like in nature, which permits various run-time permutations of the graph for
+different results.
+
+=item 4. Every C<test { }> closure is executed in an C<eval { }>:
+
+This makes subsequent tests not get skipped if one dies.
+
+=item 5. Internal storage of many simple sub-calls:
+
+This allows reasonably good L<< C<Deparse>|B::Deparse >> introspection, so if need be, the entire
+execution tree can easily be rewritten to be completely Test::StructuredObject free.
 
 =back
 
@@ -58,12 +64,18 @@ However, it has various downsides, which for most things appear reasonable to me
 
 =over 4
 
-=item 1. Due to lots of closures, the only present variable transience is achieved via external lexical
-variables. A good solution to this I've found is just pre-declare all your needed variables and pretend
+=item 1. Due to lots of closures:
+
+Due to this, the only present variable transience is achieved via external lexical variables.
+
+A good solution to this I've found is just pre-declare all your needed variables and pretend
 they're like CPU registers =).
 
-=item 2. Also, due to closure techniques, code that relies on C<< ->import >> to do lexical scope mangling
-may not work. That is pesky for various reasons, but on average its not a problem, as it is, existing Test
+=item 2. Closures break C<< ->import >> in many cases:
+
+Due to closure techniques, code that relies on C<< ->import >> to do lexical scope mangling may not work.
+
+That is pesky for various reasons, but on average its not a problem, as it is, existing Test
 files need that C<BEGIN{  use_ok }> stuff to get around this issue anyway.
 
 But basically, all you need to do is 'use' in your file scope in these cases, or use Fully Qualified sub
