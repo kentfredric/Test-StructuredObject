@@ -13,7 +13,7 @@ package Test::StructuredObject;
         test { use_ok('Foo'); },
         test { is( Foo->value, 7, 'Magic value' },
         step { note "This is a step!"; }
-        subtest( 'This is a subtest' => (
+        testgroup( 'This is a subtest' => (
             test { ok( 1, 'some inner test' ) },
             test { ok( 1, 'another inner test' ) },
         ))
@@ -59,35 +59,40 @@ If neither of these solutions appeals to you, YOU DON'T HAVE TO USE THIS MODULE!
 
 =cut
 
-use Test::More;
+use Test::More ();
 use Test::StructuredObject::TestSuite;
 use Test::StructuredObject::SubTest;
 use Test::StructuredObject::Test;
 use Test::StructuredObject::NonTest;
 
 use Sub::Exporter -setup => {
- exports => [ qw( test step testsuite subtests ) ],
- groups => { default => [qw( test step testsuite subtests ) ] },
+ exports => [ qw( test step testsuite testgroup ) ],
+ groups => { default => [qw( test step testsuite testgroup ) ] },
 
 };
 
-sub test(&) {
+sub test(&;@) {
   my $code = shift;
-  return Test::StructuredObject::Test->new( code => $code );
+  return Test::StructuredObject::Test->new( code => $code ), @_ ;
 }
 
-sub step(&) {
+sub step(&;@) {
   my $code = shift;
-  return Test::StructuredObject::NonTest->new( code => $code );
+  return Test::StructuredObject::NonTest->new( code => $code ), @_;
 }
 
 sub testsuite(@) {
+  if ( not ref $_[0] ){
+    my $name = shift;
+    my $i = Test::StructuredObject::SubTest->new( name => $name, items => \@_ );
+    return $i;
+  }
   my $i = Test::StructuredObject::TestSuite->new( items => \@_ );
 #  $i->run();
   return $i;
 }
 
-sub subtests($@) {
+sub testgroup($@) {
   my $name  = shift;
   my @items = @_;
   return Test::StructuredObject::SubTest->new( name => $name, items => \@items );

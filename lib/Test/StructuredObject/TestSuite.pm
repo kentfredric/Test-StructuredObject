@@ -14,7 +14,7 @@ around BUILDARGS => sub {
 };
 sub name { 'unnamed toplevel testsuite' }
 
-sub run {
+sub _run_items {
   my $self = shift;
   plan tests => scalar grep { !$_->isa('Test::StructuredObject::NonTest') } @{ $self->items };
   for my $test ( @{ $self->items } ) {
@@ -22,22 +22,35 @@ sub run {
   }
 }
 
+sub run {
+  my $self = shift;
+  $self->_run_items;
+}
+
+sub _label {
+  my $self = shift;
+  return __PACKAGE__ . '(' . shift . ')';
+}
+
+sub _gen_note_sub {
+      my ( $pfix, $self, $test ) = @_;
+     my $name = $self->name;
+     my $subname = $test->name;
+     my $code;
+     eval "
+     package Test::StructuredObject::TestSuite::linearize_note_eval;
+     use Test::More;
+     \$code = sub{ note(q{ $pfix Linearized Subtest $name / $subname }) }; 1 " or die;
+     return Test::StructuredObject::NonTest->new( code => $code );
+}
 sub linearize {
   my $self = shift;
   my @items;
   for my $test ( @{ $self->items } ) {
     if ( $test->isa('Test::StructuredObject::TestSuite') ) {
-      push @items, Test::StructuredObject::NonTest->new(
-        code => sub {
-          note "Running Linearized Subtest " . $self->name . '/' . $test->name;
-        }
-      );
+      push @items, _gen_note_sub( "Running", $self, $test );
       push @items, @{ $test->linearize->items };
-      push @items, Test::StructuredObject::NonTest->new(
-        code => sub {
-          note "Ending Linearized Subtest " . $self->name . '/' . $test->name;
-        }
-      );
+      push @items, _gen_note_sub("Ending", $self, $test );
 
       next;
     }
@@ -47,10 +60,13 @@ sub linearize {
 }
 
 sub to_s {
-    my $self = shift;
-  my $i = 0;
+  my $self = shift;
+  my $i    = 0;
   return $self->_label(
-    join( ',', map { $_->isa('Test::StructuredObject::NonTest') ? $_->to_s : ++$i . '=>' . $_->to_s } @{ shift->items } ) );
+    join( ',',
+      map { ( $_->isa('Test::StructuredObject::NonTest') ? "\n#step\n" : "\n#test " . ++$i . "\n" ) . $_->to_s }
+        @{ $self->items } )
+  );
 }
 
 __PACKAGE__->meta->make_immutable;

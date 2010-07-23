@@ -9,6 +9,7 @@ use namespace::autoclean;
 use Carp qw( carp );
 
 sub _label {
+    my $self = shift;
     return __PACKAGE__ . '(' .  shift  . ')';
 }
 

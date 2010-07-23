@@ -12,10 +12,7 @@ has name => ( isa => 'Str', required => 1, is => 'rw' );
 sub run {
   my $self = shift;
   subtest $self->name, sub {
-    plan tests => scalar grep { !$_->isa('NonTest') } @{ $self->items };
-    for my $test ( @{ $self->items } ) {
-      $test->run();
-    }
+    $self->_run_items();
   };
 }
 
