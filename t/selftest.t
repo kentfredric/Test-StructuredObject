@@ -1,4 +1,4 @@
-#
+#Tests the code in SubTest'd tap format.
 
 use strict;
 use warnings;
@@ -9,5 +9,5 @@ use Frobinate::Test;
 
 Frobinate::Test->testcode->run();
 
-print Frobinate::Test->testcode->to_s;
+#print Frobinate::Test->testcode->to_s;
 

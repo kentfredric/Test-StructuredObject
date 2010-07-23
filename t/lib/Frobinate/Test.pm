@@ -1,8 +1,10 @@
 package Frobinate::Test;
 
-# $Id:$
+# ABSTRACT: A dummy package that just returns a test object.
+
 use strict;
 use warnings;
+
 use Test::More;
 use Test::StructuredObject;
 use namespace::autoclean;
