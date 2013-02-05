@@ -1,0 +1,134 @@
+do{ my $x = [
+       {
+         'ARGV' => []
+       },
+       {},
+       {
+         'has_config_data' => undef,
+         'test_file_exts' => [
+                               '.t'
+                             ],
+         'magic_number' => undef,
+         'use_rcfile' => 1,
+         'PL_files' => undef,
+         'conflicts' => {},
+         '_added_to_INC' => [],
+         'prefix_relpaths' => {},
+         'pod_files' => undef,
+         'build_elements' => [
+                               'PL',
+                               'support',
+                               'pm',
+                               'xs',
+                               'share_dir',
+                               'pod',
+                               'script'
+                             ],
+         'recommends' => {},
+         'original_prefix' => {},
+         'metafile2' => 'META.json',
+         'build_requires' => {
+                               'File::Temp' => 0,
+                               'Test::More' => '0.98',
+                               'Module::Build' => '0.4003',
+                               'File::Find' => 0,
+                               'FindBin' => 0
+                             },
+         'install_path' => {},
+         'xs_files' => undef,
+         'installdirs' => 'site',
+         'module_name' => 'Test::StructuredObject',
+         'auto_configure_requires' => 1,
+         'build_class' => 'Module::Build',
+         'include_dirs' => [],
+         'config' => undef,
+         'allow_mb_mismatch' => 0,
+         'mymetafile2' => 'MYMETA.json',
+         'orig_dir' => '/home/kent/perl/Test-StructuredObject/Test-StructuredObject-0.01000010',
+         'c_source' => undef,
+         'tap_harness_args' => {},
+         'mymetafile' => 'MYMETA.yml',
+         'install_base' => undef,
+         'create_packlist' => 1,
+         'blib' => 'blib',
+         'sign' => undef,
+         'recursive_test_files' => 1,
+         'create_makefile_pl' => undef,
+         'build_bat' => 0,
+         'bindoc_dirs' => [
+                            'blib/script'
+                          ],
+         'scripts' => undef,
+         'program_name' => undef,
+         'dist_abstract' => 'Use a structured execution-graph to create a test object which runs your tests smartly.',
+         'dist_name' => 'Test-StructuredObject',
+         'script_files' => [],
+         'meta_add' => {},
+         'meta_merge' => {},
+         'bundle_inc' => [],
+         'release_status' => 'stable',
+         'pollute' => undef,
+         'dist_version_from' => undef,
+         'test_files' => undef,
+         'build_script' => 'Build',
+         'dynamic_config' => 1,
+         'debug' => undef,
+         'configure_requires' => {
+                                   'Module::Build' => '0.4003'
+                                 },
+         'cpan_client' => 'cpan',
+         'create_license' => undef,
+         'destdir' => undef,
+         'mb_version' => '0.4003',
+         'recurse_into' => [],
+         'pm_files' => undef,
+         'autosplit' => undef,
+         'html_css' => '',
+         'prereq_action_types' => [
+                                    'requires',
+                                    'build_requires',
+                                    'conflicts',
+                                    'recommends'
+                                  ],
+         'bundle_inc_preload' => [],
+         'needs_compiler' => '',
+         'quiet' => undef,
+         'dist_suffix' => undef,
+         'license' => 'perl',
+         'share_dir' => undef,
+         'config_dir' => '_build',
+         'debugger' => undef,
+         'extra_compiler_flags' => [],
+         'dist_version' => '0.01000010',
+         'dist_author' => [
+                            'Kent Fredric <kentnl@cpan.org>'
+                          ],
+         'install_base_relpaths' => {},
+         'use_tap_harness' => 0,
+         'verbose' => undef,
+         'requires' => {
+                         'B::Deparse' => 0,
+                         'perl' => '5.006',
+                         'warnings' => 0,
+                         'strict' => 0,
+                         'Sub::Exporter' => 0,
+                         'namespace::autoclean' => 0,
+                         'Test::More' => '0.98',
+                         'Moose' => 0,
+                         'Carp' => 0
+                       },
+         'create_readme' => undef,
+         'install_sets' => {},
+         'extra_linker_flags' => [],
+         'metafile' => 'META.yml',
+         'prefix' => undef,
+         'perl' => '/home/kent/perl5/perlbrew/perls/perl-blead/bin/perl5.17.9',
+         'get_options' => {},
+         'base_dir' => '/home/kent/perl/Test-StructuredObject/Test-StructuredObject-0.01000010',
+         'libdoc_dirs' => [
+                            'blib/lib',
+                            'blib/arch'
+                          ]
+       }
+     ];
+$x; }

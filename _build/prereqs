@@ -1,0 +1,23 @@
+do{ my $x = {
+       'recommends' => {},
+       'requires' => {
+                       'B::Deparse' => 0,
+                       'perl' => '5.006',
+                       'warnings' => 0,
+                       'strict' => 0,
+                       'Sub::Exporter' => 0,
+                       'namespace::autoclean' => 0,
+                       'Test::More' => '0.98',
+                       'Moose' => 0,
+                       'Carp' => 0
+                     },
+       'build_requires' => {
+                             'File::Temp' => 0,
+                             'Test::More' => '0.98',
+                             'Module::Build' => '0.4003',
+                             'File::Find' => 0,
+                             'FindBin' => 0
+                           },
+       'conflicts' => {}
+     };
+$x; }
