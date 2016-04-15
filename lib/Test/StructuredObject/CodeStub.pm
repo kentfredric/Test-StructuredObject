@@ -26,7 +26,7 @@ sub _label {
 
 =method C<dcode>
 
-Return the source-code of this objects C<coderef> using L< B::Deparse|B::Deparse >.
+Return the source-code of this objects C<coderef> using L<B::Deparse>.
 Will not work on the base class as it needs C<< ->code >> to work.
 
 =cut
